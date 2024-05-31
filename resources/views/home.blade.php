@@ -54,6 +54,12 @@
           </ul>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{route ('reservations.index')}}">Reservasi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route ('reservations.room-stats')}}">Statistik</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{route ('about')}}">Tentang Kami</a>
         </li>
       </ul>
@@ -88,7 +94,7 @@
         <p class="card-text">Kamar hotel deluxe menawarkan ruang yang luas, dekorasi elegan, dan fasilitas modern yang memenuhi segala kebutuhan Anda.</p>
         <p> - Akses eksklusif ke fasilitas hotel termasuk kolam renang, dan pusat kebugaran.</p>
         <p> - Dengan perpaduan sempurna antara kenyamanan dan kemewahan.</p>
-        <h6 class="card-title">400.000/hari</h6> <br>
+        <h6 class="card-title">500.000/hari</h6> <br>
         <a href="{{route ('deluxe')}}" class="btn btn-success">Lihat Kamar</a>
       </div>
     </div>

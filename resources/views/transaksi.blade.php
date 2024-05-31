@@ -48,8 +48,8 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{{route ('standart')}}">Standar Class</a></li>
-                  <li><a class="dropdown-item" href="{{route ('deluxe')}}">Deluxe Class</a></li>
-                  <li><a class="dropdown-item " href="{{route ('familly')}}">Familly Class</a></li>
+                  <li><a class="dropdown-item active" href="{{route ('deluxe')}}">Deluxe Class</a></li>
+                  <li><a class="dropdown-item" href="{{route ('familly')}}">Familly Class</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -86,20 +86,20 @@
             <label>Nomor Identitas  </label> : {{ $booking->nik }}<br>
             <label>Jenis Kelamin    </label> : {{ $booking->gender }}<br>
             <label>Tipe Kamar       </label> : {{ $booking->room_id }}<br>
-            <label>Harga Kamar      </label> : {{ $booking->price }}<br>
+            <label>Harga Kamar      </label> : Rp. {{number_format($booking->price,0)}}<br>
             <label>Tanggal Pesan    </label> : {{ $booking->date }}<br>
             <label>Durasi Menginap  </label> : {{ $booking->time }} Hari<br>
             <label>Breakfast        </label> : {{ $booking->breakfast }}<br>
             <label>Diskon</label> : 
             @php
                 $total = $booking->total;
-                if ($booking->time > 3) {
+                if ($booking->time > 2) {
                     echo "Terdapat Diskon (10%)<br>";
                 } else {
                     echo "Tidak Ada Diskon<br>";
                 }
             @endphp
-            <label>Total Bayar      </label> : {{ $booking->total }}<br>
+            <label>Total Bayar      </label> : Rp. {{ number_format($booking->total, 0) }}<br>
            
         </div>
         </div>

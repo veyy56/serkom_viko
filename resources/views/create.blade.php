@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="{{route ('home')}}">Home</a>
+          <a class="nav-link  " aria-current="page" href="{{route ('home')}}">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="{{route ('create')}}">Pesan Kamar</a>
@@ -30,10 +30,16 @@
           Type Kamar
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{route ('standart')}}">Standar Class</a></li>
+            <li><a class="dropdown-item " href="{{route ('standart')}}">Standar Class</a></li>
             <li><a class="dropdown-item" href="{{route ('deluxe')}}">Deluxe Class</a></li>
-            <li><a class="dropdown-item" href="{{route ('familly')}}">Familly Class</a></li>
+            <li><a class="dropdown-item " href="{{route ('familly')}}">Familly Class</a></li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route ('reservations.index')}}">Reservasi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route ('reservations.room-stats')}}">Statistik</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route ('about')}}">Tentang Kami</a>
@@ -137,59 +143,51 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Fungsi untuk menghitung total bayar
-        function hitungTotal() {
-            var price = parseFloat(document.getElementById('price').value);
-            var time = parseFloat(document.getElementById('time').value);
-            var breakfastChecked = document.getElementById('breakfast').checked;
-            var total = price * time;
+      function hitungTotal() {
+        var price = parseFloat(document.getElementById('price').value);
+        var time = parseFloat(document.getElementById('time').value);
+        var breakfastChecked = document.getElementById('breakfast').checked;
+        var totalRoomCost = price * time;
+        var breakfastCost = 0;
 
-            // Tambah biaya breakfast jika checkbox breakfast dipilih
-            if (breakfastChecked) {
-                var totalharga;
-                total += 80000 * time;
-                totalharga = total; // Harga breakfast
-            }
-
-            // Diskon 10% jika menginap lebih dari 3 hari
-            if (time > 3) {
-                var totaldiskon;
-                var diskon = total * 0.1;
-                totaldiskon = total - diskon;
-            }
-
-            // Tampilkan total di dalam input total bayar
-            if (time > 3) {
-                document.getElementById('total').value = totaldiskon;
-            } else {
-                document.getElementById('total').value = total;
-            }
-            
+        // Tambah biaya breakfast jika checkbox breakfast dipilih
+        if (breakfastChecked) {
+          breakfastCost = 80000 * time;
         }
 
-        // Panggil fungsi hitungTotal saat tombol "Hitung Total Bayar" diklik
-        document.getElementById('hitungTotal').addEventListener('click', hitungTotal);
+        var totalCost = totalRoomCost + breakfastCost;
+
+        // Diskon 10% jika menginap lebih dari 3 hari, tetapi tidak termasuk biaya breakfast
+        if (time > 2) {
+          totalRoomCost = totalRoomCost * 0.9;
+        }
+
+        totalCost = totalRoomCost + breakfastCost;
+
+        // Tampilkan total di dalam input total bayar
+        document.getElementById('total').value = totalCost;
+      }
+
+      document.getElementById('hitungTotal').addEventListener('click', hitungTotal);
     });
+
     function updatePrice() {
-        var roomType = document.getElementById("room_id").value;
-        var priceInput = document.getElementById("price");
-        
-        // Set harga kamar berdasarkan tipe kamar yang dipilih
-        if (roomType === "standart") {
-            // Harga untuk tipe kamar deluxe
-            priceInput.value = "100000"; 
-        } else if (roomType === "deluxe") {
-            // Harga untuk tipe kamar standar
-            priceInput.value = "400000"; 
-        } else if (roomType === "familly") {
-            // Harga untuk tipe kamar suite
-            priceInput.value = "1000000"; 
-        }
-        }
-        
-        function goBack() {
-        window.history.back();
+      var roomType = document.getElementById("room_id").value;
+      var priceInput = document.getElementById("price");
+
+      // Set harga kamar berdasarkan tipe kamar yang dipilih
+      if (roomType === "standart") {
+        priceInput.value = "100000"; 
+      } else if (roomType === "deluxe") {
+        priceInput.value = "500000"; 
+      } else if (roomType === "familly") {
+        priceInput.value = "1000000"; 
+      }
     }
-</script>
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 
     </div>

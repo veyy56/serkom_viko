@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     return view('/home');
@@ -15,3 +16,5 @@ Route::post('/form', [BookingController::class, 'store'])->name('form.store');
 Route::get('/standart', [BookingController::class, 'standart'])->name('standart');
 Route::get('/Deluxe', [BookingController::class, 'deluxe'])->name('deluxe');
 Route::get('/executive', [BookingController::class, 'familly'])->name('familly');
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+Route::get('/room-stats', [ReservationController::class, 'roomStats'])->name('reservations.room-stats');

@@ -7,6 +7,11 @@
     <title>Daftar Pemesan</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .text-right {
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -48,7 +53,7 @@
   </div>
 </nav>
 
-    <div class="container mt-3">
+<div class="container mt-3">
         <h1 class="text-center">Daftar Pemesan</h1>
         <table class="table table-striped">
             <thead>
@@ -57,26 +62,25 @@
                     <th>Jenis Kelamin</th>
                     <th>Nomor Identitas</th>
                     <th>Tipe Kamar</th>
-                    <th>Harga Kamar</th>
+                    <th>Harga Kamar (Rp)</th>
                     <th>Tanggal Pesan</th>
                     <th>Durasi Menginap</th>
                     <th>Breakfast</th>
-                    <th>Total Bayar</th>
+                    <th>Total Bayar (Rp)</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($reservations as $reservation)
                     <tr>
                         <td>{{ $reservation->name }}</td>
-                        <td>{{ $reservation->gender == 'lakiLaki' ? 'Laki-laki' : 'Perempuan' }}</td>
+                        <td>{{ $reservation->gender == 'Laki-laki' ? 'Laki-laki' : 'Perempuan' }}</td>
                         <td>{{ $reservation->nik }}</td>
                         <td>{{ ucfirst($reservation->room_id) }}</td>
-                        <td>Rp.{{ number_format($reservation->price, 0) }}</td>
-                        
+                        <td>{{ number_format($reservation->price, 0, ',', '.') }}</td>
                         <td>{{ $reservation->date }}</td>
-                        <td>{{ $reservation->time }}</td>
-                        <td>{{ $reservation->breakfast ? 'Ya' : 'Tidak' }}</td>
-                        <td>{{ number_format($reservation->total, 2) }}</td>
+                        <td style="text-align: center;">{{ $reservation->time }}</td>
+                        <td>{{ $reservation->breakfast}}</td>
+                        <td class="text-right">{{ number_format($reservation->total, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>

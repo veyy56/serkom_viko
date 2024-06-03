@@ -56,31 +56,38 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Grafik untuk keluaran dari rekapan jumlah pemesanan
             var ctx = document.getElementById('roomStatsChart').getContext('2d');
+            // Mengambil data statistik kamar dalam format JSON dari variabel server-side $roomStats
             var roomStats = @json($roomStats);
+            // Membuat label dari kunci objek roomStats dan mengubah huruf pertama menjadi huruf kapital
             var labels = Object.keys(roomStats).map(key => key.charAt(0).toUpperCase() + key.slice(1));
+            // Mengambil nilai total pemesanan dari objek roomStats
             var data = Object.values(roomStats).map(stat => stat.totalBookings);
+            // Mendefinisikan warna untuk masing-masing batang grafik
             var colors = ['red', 'green', 'blue'];
 
+            // Grafik batang menggunakan Chart.JS
             var roomStatsChart = new Chart(ctx, {
-                type: 'bar',
+              // Jenis grafik adalah grafik batang
+              type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: labels, // Label untuk sumbu-x grafik
                     datasets: [{
-                        label : 'total pemesanan',
-                        data: data,
-                        backgroundColor: colors
+                        label : 'total pemesanan', // Label untuk dataset
+                        data: data, // Data yang akan ditampilkan pada grafik
+                        backgroundColor: colors // Warna latar belakang batang
                     }]
                 },
                 options: {
                     plugins: {
                         legend: {
-                            display: false
+                            display: false 
                         }
                     },
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true //Memulai sumbu-y dari nol
                         }
                     }
                 }

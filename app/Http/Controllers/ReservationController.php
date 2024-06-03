@@ -17,21 +17,24 @@ class ReservationController extends Controller
 
     public function roomStats()
     {
-        // Calculate statistics for each room type
+        // Kalkulasi Statistik untuk type kamar
         $roomTypes = ['standart', 'deluxe', 'familly'];
         $roomStats = [];
 
         foreach ($roomTypes as $roomType) {
+            // Menghitung total jumlah pemesanan untuk tipe kamar tertentu
             $totalBookings = Booking::where('room_id', $roomType)->count();
+            // Menghitung total pendapatan untuk tipe kamar tertentu
             $totalRevenue = Booking::where('room_id', $roomType)->sum('total');
 
+            // Menyimpan total jumlah pemesanan dan total pendapatan ke dalam array $roomStats
             $roomStats[$roomType] = [
-                'totalBookings' => $totalBookings,
-                'totalRevenue' => $totalRevenue,
+                'totalBookings' => $totalBookings, // Total jumlah pemesanan untuk tipe kamar
+                'totalRevenue' => $totalRevenue, // Total pendapatan untuk tipe kamar
             ];
         }
 
-        // Pass room stats data to the view
+        // Meneruskan data statistik ruangan ke tampilan
         return view('reservations.room-stats', compact('roomStats'));
     }
 }

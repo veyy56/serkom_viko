@@ -80,7 +80,7 @@
                 <a href="{{route ('create')}}" class="btn btn-success">Pesan Sekarang</a>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mt-5">
             <div class="video">
             <video width="400" height="400" controls>
             <source src="{{ asset('video/Standart.mp4') }}" type="video/mp4">
